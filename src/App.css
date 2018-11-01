@@ -1,0 +1,45 @@
+html {
+  background-color: black;
+}
+
+.app {
+  font-family: "Verdana", "sans serif";
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.Head {
+  background-color: #310;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 40px;
+}
+
+.margin-1 {
+  margin: 1rem;
+}
+
+.mlr-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.padding-1 {
+  padding: 1px;
+}
+
+.right {
+  float: right;
+
+}
+
+.child-mg-1 > span {
+  margin: 5px;
+}
+
+.font-125 {
+  font-size: 125%;
+}
