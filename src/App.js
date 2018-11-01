@@ -9,12 +9,12 @@ class App extends Component {
   constructor (props) {
       super(props);
       this.state = {
-          page: login, 
+          page: login,  // To store which page we are on. 
       };
   }
 
   render () {
-    return (
+    return (    // App = Header + Body
       <div className="bg-dark text-white padding-1 app">
         <Head page={this.state.page} />
         <this.state.page.body nextPage={this.nextPage.bind(this)} />
@@ -23,11 +23,12 @@ class App extends Component {
   }
 
   nextPage () {
+    // Child components call this func to let app proceed to the next page
     this.setState({page: collect});
   }
 }
 
-const Head = (props) => {
+const Head = (props) => {   // The header of each page
     if (props.page.title === null) return null;
     return (
         <div className={chainedClasses.head}>

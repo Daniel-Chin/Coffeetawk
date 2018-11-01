@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import chainedClasses from './class_chaining';
 
-class Login extends Component {
+class Login extends Component { // The login page
     constructor (props) {
         super(props);
         this.state = {
-            password: '',
+            password: '',   // To store user input
         }
     }
-    render () { 
+    render () {
         return (
             <div className={chainedClasses.my_card}>
                 <div className="card-header">
@@ -16,16 +16,17 @@ class Login extends Component {
                 </div>
                 <div className="card-body">
                     <p className="card-text">
-                        Please enter your password, or scan your passQRcode. 
+                        Please enter your password, or scan your passQRcode.
                     </p>
-                    <input 
+                    <input
                         onChange={function (event) {
-                            this.setState({password: event.target.value});
-                        }.bind(this)} 
-                        type="password" 
-                        className="form-control border-3" 
+                            this.setState({password: event.target.value});  // update state
+                        }.bind(this)}
+                        type="password"
+                        className="form-control border-3"
                     />
                     <button onClick={function () {
+                        // Validate password
                         console.log('Pretending password valid. ');
                         this.setState({password: 'RESET'});
                         this.props.nextPage();
@@ -36,14 +37,15 @@ class Login extends Component {
         );
     }
 }
- 
+
 const qr = function tryLoginQR () {
+    // Scan QR button does nothing
     alert(`This demo doesn't support QR login. `);
 };
 
-const login = {
-    title: 'Data Collector', 
-    body: Login,
+const login = { // What we export
+    title: 'Data Collector',    // title string for this page
+    body: Login,    // body component for this page
 };
 
 export default login;

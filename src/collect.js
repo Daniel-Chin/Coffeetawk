@@ -3,11 +3,11 @@ import chainedClasses from './class_chaining';
 
 class CollectBody extends Component {
     STATE = {
-        page: 'collecting', 
-        time: new Date(), 
-        bag: null, 
-        n_drinks: null,
-        editing: false,
+        page: 'collecting', // which page are we on? collecting or reviewing?
+        time: new Date(),  // stats data
+        bag: null,         // stats data
+        n_drinks: null,    // stats data
+        editing: false,     // Did user press "Edit"?
     };
 
     constructor (props) {
@@ -15,13 +15,13 @@ class CollectBody extends Component {
         this.state = Object.assign({}, this.STATE, {token: Math.random()});
     }
 
-    renderCollecting () {
+    renderCollecting () {   // render the "collecting" page
         return (
             <div>
                 <TimeEntry value={this.state.time} update={this.update.bind(this)} />
                 <BagEntry value={this.state.bag} update={this.update.bind(this)} />
                 <DrinkEntry value={this.state.n_drinks} update={this.update.bind(this)} />
-                <Foot 
+                <Foot
                     submit={function () {
                         this.setState({page: 'reviewing'});
                         pretendSubmit(this.state);
@@ -29,31 +29,31 @@ class CollectBody extends Component {
                     }.bind(this)}
                     whatsMissing={function () {
                         return this.whatsMissing()
-                    }.bind(this)} 
-                    editing={this.state.editing} 
+                    }.bind(this)}
+                    editing={this.state.editing}
                 />
             </div>
         );
     }
 
-    renderReviewing () {
+    renderReviewing () {    // render the "reviewing" page
         return (
             <div className="text-center">
                 <div className={chainedClasses.head}>
-                    Success! 
+                    Success!
                 </div>
                 <div className={chainedClasses.my_card}>
                     <div className="card-body">
-                        <ReviewBox 
-                            time={this.state.time} 
-                            bag={this.state.bag} 
-                            n_drinks={this.state.n_drinks} 
+                        <ReviewBox
+                            time={this.state.time}
+                            bag={this.state.bag}
+                            n_drinks={this.state.n_drinks}
                         />
                         <div>Made a mistake? </div>
-                        <button 
+                        <button
                             onClick={function () {
                                 this.setState({
-                                    page: 'collecting', 
+                                    page: 'collecting',
                                     editing: true,
                                 });
                                 window.scrollTo(0, 0);
@@ -64,14 +64,14 @@ class CollectBody extends Component {
                 <div className={chainedClasses.my_card}>
                     <div className="card-body">
                         <button onClick={function () {
-                            this.setState(this.STATE);
-                            this.setState({token: Math.random()});
+                            this.setState(this.STATE);              // reset state
+                            this.setState({token: Math.random()});  // New token
                             window.scrollTo(0, 0);
                         }.bind(this)} className="btn btn-primary btn-lg">
                             NEXT
                         </button>
                         <div className="font-125">
-                            Keeping it up! 
+                            Keeping it up!
                         </div>
                     </div>
                 </div>
@@ -90,19 +90,21 @@ class CollectBody extends Component {
     }
 
     render () {
-        if (this.state.page === 'collecting') {
+        if (this.state.page === 'collecting')
             return this.renderCollecting();
-        }
-        return this.renderReviewing();
+        if (this.state.page === 'reviewing')
+            return this.renderReviewing();
     }
 
     update(key, value) {
+        // update stats data in state
         const item = {};
         item[key] = value;
         this.setState(item);
     }
 
     whatsMissing () {
+        // return the string to display on the Submit button
         if (this.state.bag == null)
             return 'bag';
         if (this.state.n_drinks == null)
@@ -112,7 +114,8 @@ class CollectBody extends Component {
 }
 
 class TimeEntry extends Component {
-    render () { 
+    // the Time card
+    render () {
         return (
             <div className={chainedClasses.my_card}>
                 <div className="card-header">
@@ -121,16 +124,16 @@ class TimeEntry extends Component {
                 <div className="card-body">
                     <TimeDisplay time={this.props.value} />
                     <div className="btn-group right" role="group">
-                        <button 
+                        <button
                             onClick={function () {
                                 this.acc(-1);
-                            }.bind(this)} 
+                            }.bind(this)}
                             type="button" className="btn btn-secondary"
                         >-</button>
-                        <button 
+                        <button
                             onClick={function () {
                                 this.acc(+1);
-                            }.bind(this)} 
+                            }.bind(this)}
                             type="button" className="btn btn-secondary"
                         >+</button>
                     </div>
@@ -140,6 +143,7 @@ class TimeEntry extends Component {
     }
 
     acc (delta) {
+        // accumulate state.time
         const newTime = new Date(this.props.value.getTime() + delta * 60 * 1000);
         this.props.update('time', newTime);
     }
@@ -153,10 +157,11 @@ const TimeDisplay = (props) => (
 const pad = function padNumberWith0(n, width) {
     n = String(n);
     return n.length >= width ? n : new Array(width - n.length + 1).join('0') + n;
-};  
+};
 
 class BagEntry extends Component {
-    render () { 
+    // the Bag card
+    render () {
         return (
             <div className={chainedClasses.my_card}>
                 <div className="card-header">
@@ -181,14 +186,16 @@ class BagEntry extends Component {
 }
 
 const BagButton = (props) => {
+    // Smart component that knows whether it's selected.
+    // If it is, use blue. Otherwise gray.
     const style = props.caption === props.value ? 'primary' : 'secondary';
     const class_name = `btn btn-${style}`;
     return (
-        <button 
-            className={class_name} 
+        <button
+            className={class_name}
             onClick={function () {
                 props.onClick(props.caption);
-            }} 
+            }}
         >
             {props.caption}
         </button>
@@ -196,6 +203,7 @@ const BagButton = (props) => {
 };
 
 class DrinkEntry extends Component {
+    // the Drink card
     render () {
         return (
             <div className={chainedClasses.my_card}>
@@ -221,14 +229,16 @@ class DrinkEntry extends Component {
 }
 
 const NumButton = (props) => {
+    // Smart component that knows whether it's selected.
+    // If it is, use blue. Otherwise gray.
     const style = props.n_drinks === props.value ? 'primary' : 'secondary';
     const class_name = `btn btn-${style}`;
     return (
-        <button 
-            className={class_name} 
+        <button
+            className={class_name}
             onClick={function () {
                 props.onClick(props.n_drinks);
-            }} 
+            }}
         >
             {props.n_drinks}
         </button>
@@ -236,6 +246,8 @@ const NumButton = (props) => {
 };
 
 const Foot = (props) => {
+    // The submit button
+    // If input is incomplete, don't show green submit, show white warning
     let style;
     let caption;
     let action;
@@ -261,6 +273,8 @@ const Foot = (props) => {
 };
 
 const ReviewBox = (props) => {
+    // The box displaying the 3 stats data
+    // Smart plural VS sigular algorithm
     return (
         <div className="card child-mg-1 back-gray">
             <TimeDisplay time={props.time} />
@@ -271,10 +285,11 @@ const ReviewBox = (props) => {
 };
 
 const pretendSubmit = function (state) {
+    // Pretend submiting stats data to server.
     let _, time, bag, n_drinks, token;
     ({_, time, bag, n_drinks, token} = state);
-    ((x)=>(x))(_);  // To avoid unused var warning. 
-    console.log(`Pretending to submit to server: 
+    ((x)=>(x))(_);  // To avoid unused var warning.
+    console.log(`Pretending to submit to server:
         time: ${time}
         bag: ${bag}
         n_drink: ${n_drinks}
@@ -282,9 +297,9 @@ const pretendSubmit = function (state) {
     `);
 };
 
-const collect = {
-    title: null,
-    body: CollectBody,
+const collect = {   // to export
+    title: null,        // title string of this page
+    body: CollectBody,  // body component of this page
 };
 
 export default collect;
