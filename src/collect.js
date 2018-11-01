@@ -7,6 +7,7 @@ class CollectBody extends Component {
         time: new Date(), 
         bag: null, 
         n_drinks: null,
+        editing: false,
     };
 
     constructor (props) {
@@ -29,6 +30,7 @@ class CollectBody extends Component {
                     whatsMissing={function () {
                         return this.whatsMissing()
                     }.bind(this)} 
+                    editing={this.state.editing} 
                 />
             </div>
         );
@@ -50,7 +52,10 @@ class CollectBody extends Component {
                         <div>Made a mistake? </div>
                         <button 
                             onClick={function () {
-                                this.setState({page: 'collecting'});
+                                this.setState({
+                                    page: 'collecting', 
+                                    editing: true,
+                                });
                                 window.scrollTo(0, 0);
                             }.bind(this)} className="btn btn-warning"
                         >Edit</button>
@@ -245,6 +250,7 @@ const Foot = (props) => {
         action = () => (null);
     }
     const class_name = `btn btn-${style} btn-block`;
+    if (props.editing) caption = 'Update';
     return (
         <div className="margin-1">
             <button onClick={action} className={class_name}>
