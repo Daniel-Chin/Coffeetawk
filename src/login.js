@@ -23,6 +23,7 @@ class Login extends Component {
                     }.bind(this)} type="password" className="form-control" />
                     <button onClick={function () {
                         console.log('Pretending password valid. ');
+                        this.setState({password: 'RESET'});
                         this.props.nextPage();
                     }.bind(this)} type="button" className="btn btn-block btn-primary">Log in</button>
                     <button onClick={qr} type="button" className="btn btn-block btn-secondary">Scan QR</button>
