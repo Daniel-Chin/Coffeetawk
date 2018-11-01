@@ -262,7 +262,7 @@ const Foot = (props) => {
 
 const ReviewBox = (props) => {
     return (
-        <div className="card child-mg-1">
+        <div className="card child-mg-1 back-gray">
             <TimeDisplay time={props.time} />
             <span>{props.bag}</span>
             <span>{props.n_drinks} drink{props.n_drinks===1 ? '' : 's'}</span>

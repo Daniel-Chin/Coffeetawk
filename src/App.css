@@ -43,3 +43,11 @@ html {
 .font-125 {
   font-size: 125%;
 }
+
+.back-gray {
+  background-color: #d8e0e0 !important;
+}
+
+.border-3 {
+  border: 3px solid #ced4da !important;
+}

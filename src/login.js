@@ -18,9 +18,13 @@ class Login extends Component {
                     <p className="card-text">
                         Please enter your password, or scan your passQRcode. 
                     </p>
-                    <input onChange={function (event) {
-                        this.setState({password: event.target.value});
-                    }.bind(this)} type="password" className="form-control" />
+                    <input 
+                        onChange={function (event) {
+                            this.setState({password: event.target.value});
+                        }.bind(this)} 
+                        type="password" 
+                        className="form-control border-3" 
+                    />
                     <button onClick={function () {
                         console.log('Pretending password valid. ');
                         this.setState({password: 'RESET'});
