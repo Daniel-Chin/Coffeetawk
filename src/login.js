@@ -18,22 +18,48 @@ class Login extends Component { // The login page
                     <p className="card-text">
                         Please enter your password, or scan your passQRcode.
                     </p>
-                    <input
-                        onChange={function (event) {
-                            this.setState({password: event.target.value});  // update state
-                        }.bind(this)}
-                        type="password"
-                        className="form-control border-3"
+                    <PasswordInput 
+                        update={this.updatePassword.bind(this)} 
+                        check={this.checkPassword.bind(this)} 
                     />
-                    <button onClick={function () {
-                        // Validate password
-                        console.log('Pretending password valid. ');
-                        this.setState({password: 'RESET'});
-                        this.props.nextPage();
-                    }.bind(this)} type="button" className="btn btn-block btn-primary">Log in</button>
+                    <button onClick={this.checkPassword.bind(this)} type="button" className="btn btn-block btn-primary">Log in</button>
                     <button onClick={qr} type="button" className="btn btn-block btn-secondary">Scan QR</button>
                 </div>
             </div>
+        );
+    }
+    
+    updatePassword (value) {
+        this.setState({password: value});  // update state
+    }
+
+    checkPassword () {
+        // Validate password
+        console.log('Pretending password valid. ');
+        this.setState({password: 'RESET'});
+        this.props.nextPage();
+    }
+}
+
+class PasswordInput extends Component {
+    onChange (event) {
+        this.props.update(event.target.value);
+    }
+
+    onKeyPress (event) {
+        if (event.keyCode === 13 || event.which === 13) {
+            this.props.check();
+        }
+    }
+
+    render () {
+        return (
+            <input
+                onChange={this.onChange.bind(this)}
+                onKeyPress={this.onKeyPress.bind(this)} 
+                type="password"
+                className="form-control border-3"
+            />
         );
     }
 }
