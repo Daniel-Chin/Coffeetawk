@@ -9,7 +9,7 @@ class App extends Component {
   constructor (props) {
       super(props);
       this.state = {
-          page: login,  // To store which page we are on. 
+          page: login,  // To store which page we are on.
       };
   }
 
@@ -25,6 +25,7 @@ class App extends Component {
   nextPage () {
     // Child components call this func to let app proceed to the next page
     this.setState({page: collect});
+    window.scrollTo(0, 0);
   }
 }
 
