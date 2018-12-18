@@ -1,44 +1,48 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Coffeetawk
 
-## Available Scripts
+I made this app for Application Lab, a course at NYU Shanghai, during sophomore year. 
 
-In the project directory, you can run:
+What is Coffeetawk? 
 
-### `npm start`
+Coffeetawk is a static web page. - a UI prototype demoing an imaginary web app that makes collecting data easy. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Data consumers (market analyzers, statisticians...) can issue data models on the imaginary web app. Regular people can log onto this imaginary web app and collect data without any training. 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Coffeetawk demonstrates the data collecting UI. 
 
-### `npm test`
+How did I make it? 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Coffeetawk started as a paper prototype. I made UI components with paper and crafted them together, as a draft process. 
 
-### `npm run build`
+Coffeetawk is my first experience using REACT. It is a REACT app with Bootstrap styling. 
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Other comments
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+In this app, I focused on making the UI A) make sense to first-time users, and at the same time B) efficient to operate for regular users. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Take a look at the commit messages: 
+    Now you can press Enter to submit password
+    Added comments [documenting source code]
+    changes css to make things apparent for first time users
+    enhanced security by deleting password cache once login success
+    Changed submit to update wehen in edit mode
 
-### `npm run eject`
+Apart from the above features, Coffeetawk also uses plural and singular nouns correctly. 
+    "0 drinks, 1 drink, 2 drinks, 3 drinks, 4 drinks..."
+Also, if the data input are invalid, the Submit button will be white. It turns green when all data are validated, telling the user: you can click it now. 
+Previously, I made the button not display whenever some data are invalid. That was a bad idea. The user had to scroll a second time after they validate the data, for the new button to appear. So, I changed it to the white-green scheme, saving the user one swipe. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+GIF Demo
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[Alt Text](https://media.giphy.com/media/oymRyMemkmjrKxcVHk/giphy.gif)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+How to try it
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+You need to have npm installed. 
+To try this demo, 
+1. Clone this repo
+2. $ npm i
+3. $ npm start
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Daniel Chin
+2018/12/18
